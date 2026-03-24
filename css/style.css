@@ -1,0 +1,321 @@
+/* 都道府県ガイド - Map-inspired blue/green theme */
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&display=swap');
+
+:root {
+  --primary: #1a6b4a;
+  --primary-light: #2d9e6e;
+  --primary-dark: #0e4a33;
+  --secondary: #1e5f8a;
+  --secondary-light: #3a8ec4;
+  --accent: #e8a838;
+  --bg: #f4f7f5;
+  --card-bg: #ffffff;
+  --text: #2c3e2e;
+  --text-light: #5a6e5c;
+  --border: #c8d8cc;
+  --shadow: 0 2px 12px rgba(26,107,74,0.08);
+  --radius: 10px;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: 'Noto Sans JP', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.8;
+  font-size: 16px;
+}
+
+a { color: var(--secondary); text-decoration: none; transition: color 0.2s; }
+a:hover { color: var(--primary-light); }
+
+/* Header */
+.site-header {
+  background: linear-gradient(135deg, var(--primary-dark), var(--secondary));
+  color: #fff;
+  padding: 2rem 1rem;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.site-header::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(255,255,255,0.05) 1px, transparent 1px);
+  background-size: 30px 30px;
+}
+.site-header h1 { font-size: 2.2rem; font-weight: 700; position: relative; }
+.site-header p { font-size: 1rem; opacity: 0.9; margin-top: 0.5rem; position: relative; }
+
+/* Container */
+.container { max-width: 1100px; margin: 0 auto; padding: 2rem 1rem; }
+
+/* Breadcrumb */
+.breadcrumb { font-size: 0.85rem; color: var(--text-light); margin-bottom: 1.5rem; }
+.breadcrumb a { color: var(--primary); }
+
+/* Region filter */
+.region-filter {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  justify-content: center;
+  margin: 1.5rem 0;
+}
+.region-filter button {
+  padding: 0.4rem 1rem;
+  border: 2px solid var(--primary);
+  background: transparent;
+  color: var(--primary);
+  border-radius: 20px;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 0.9rem;
+  font-weight: 500;
+  transition: all 0.2s;
+}
+.region-filter button:hover,
+.region-filter button.active {
+  background: var(--primary);
+  color: #fff;
+}
+
+/* Japan Map Grid */
+.japan-map {
+  display: grid;
+  grid-template-columns: repeat(11, 1fr);
+  gap: 4px;
+  max-width: 750px;
+  margin: 2rem auto;
+}
+.pref-cell {
+  aspect-ratio: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--primary);
+  color: #fff;
+  font-size: 0.7rem;
+  font-weight: 500;
+  border-radius: 4px;
+  text-decoration: none;
+  transition: all 0.2s;
+  padding: 2px;
+  text-align: center;
+  line-height: 1.2;
+}
+.pref-cell:hover {
+  background: var(--accent);
+  color: var(--text);
+  transform: scale(1.15);
+  z-index: 2;
+}
+.pref-cell.empty { background: transparent; pointer-events: none; }
+
+/* Region colors */
+.pref-cell[data-region="hokkaido"] { background: #2980b9; }
+.pref-cell[data-region="tohoku"] { background: #27ae60; }
+.pref-cell[data-region="kanto"] { background: #e67e22; }
+.pref-cell[data-region="chubu"] { background: #8e44ad; }
+.pref-cell[data-region="kinki"] { background: #c0392b; }
+.pref-cell[data-region="chugoku"] { background: #16a085; }
+.pref-cell[data-region="shikoku"] { background: #d35400; }
+.pref-cell[data-region="kyushu"] { background: #2c3e50; }
+
+/* Prefecture list (fallback / alternative) */
+.pref-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 0.8rem;
+  margin: 2rem 0;
+}
+.pref-list a {
+  display: block;
+  background: var(--card-bg);
+  padding: 0.8rem 1rem;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  text-align: center;
+  font-weight: 500;
+  border-left: 4px solid var(--primary);
+  transition: all 0.2s;
+}
+.pref-list a:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 16px rgba(26,107,74,0.15);
+  border-left-color: var(--accent);
+}
+
+/* Info Cards */
+.info-card {
+  background: var(--card-bg);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 1.5rem 2rem;
+  margin-bottom: 1.5rem;
+  border-top: 4px solid var(--primary);
+}
+.info-card h2 {
+  font-size: 1.3rem;
+  color: var(--primary-dark);
+  margin-bottom: 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--border);
+}
+.info-card h2::before {
+  margin-right: 0.5rem;
+}
+
+/* Basic info table */
+.basic-info-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+.basic-info-table th {
+  text-align: left;
+  padding: 0.6rem 1rem;
+  background: #e8f5ee;
+  color: var(--primary-dark);
+  width: 30%;
+  font-weight: 500;
+  border-bottom: 1px solid var(--border);
+}
+.basic-info-table td {
+  padding: 0.6rem 1rem;
+  border-bottom: 1px solid var(--border);
+}
+
+/* Feature list */
+.feature-list {
+  list-style: none;
+  padding: 0;
+}
+.feature-list li {
+  padding: 0.5rem 0;
+  border-bottom: 1px solid #f0f0f0;
+  padding-left: 1.5rem;
+  position: relative;
+}
+.feature-list li::before {
+  content: '▸';
+  position: absolute;
+  left: 0;
+  color: var(--primary);
+  font-weight: bold;
+}
+
+/* Spot cards */
+.spot-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1rem;
+}
+.spot-item {
+  background: #f8faf9;
+  border-radius: 8px;
+  padding: 1rem;
+  border-left: 3px solid var(--primary-light);
+}
+.spot-item h3 {
+  font-size: 1rem;
+  color: var(--primary);
+  margin-bottom: 0.3rem;
+}
+.spot-item p { font-size: 0.9rem; color: var(--text-light); }
+
+/* Dialect */
+.dialect-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+.dialect-table th, .dialect-table td {
+  padding: 0.5rem 1rem;
+  border-bottom: 1px solid var(--border);
+  text-align: left;
+}
+.dialect-table th { background: #e8f0f5; color: var(--secondary); }
+
+/* Amazon affiliate button */
+.affiliate-link {
+  display: inline-block;
+  background: linear-gradient(135deg, #ff9900, #e88a00);
+  color: #fff !important;
+  padding: 0.5rem 1.2rem;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  margin: 0.3rem;
+  transition: all 0.2s;
+}
+.affiliate-link:hover {
+  background: linear-gradient(135deg, #ffad33, #ff9900);
+  transform: translateY(-1px);
+}
+
+.affiliate-section {
+  background: #fffaf0;
+  border: 1px solid #ffe0a0;
+  border-radius: 8px;
+  padding: 1rem 1.5rem;
+  margin-top: 1rem;
+}
+.affiliate-section p { font-size: 0.9rem; margin-bottom: 0.5rem; }
+
+/* Neighbor links */
+.neighbor-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+}
+.neighbor-links a {
+  background: var(--primary);
+  color: #fff !important;
+  padding: 0.4rem 1rem;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  transition: background 0.2s;
+}
+.neighbor-links a:hover { background: var(--primary-light); }
+
+/* Footer */
+.site-footer {
+  background: var(--primary-dark);
+  color: rgba(255,255,255,0.7);
+  text-align: center;
+  padding: 2rem 1rem;
+  margin-top: 3rem;
+  font-size: 0.85rem;
+}
+.site-footer a { color: rgba(255,255,255,0.9); }
+
+/* Responsive */
+@media (max-width: 768px) {
+  .site-header h1 { font-size: 1.6rem; }
+  .info-card { padding: 1rem 1.2rem; }
+  .basic-info-table th { width: 35%; }
+  .spot-grid { grid-template-columns: 1fr; }
+  .japan-map { grid-template-columns: repeat(8, 1fr); }
+  .pref-cell { font-size: 0.6rem; }
+}
+
+/* AdSense placeholder */
+.ad-unit {
+  background: #f0f0f0;
+  border: 1px dashed #ccc;
+  padding: 1rem;
+  text-align: center;
+  margin: 1.5rem 0;
+  border-radius: var(--radius);
+  min-height: 90px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #999;
+  font-size: 0.85rem;
+}
