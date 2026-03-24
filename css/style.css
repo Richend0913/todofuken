@@ -25,7 +25,11 @@ body {
   color: var(--text);
   line-height: 1.8;
   font-size: 16px;
+  overflow-x: hidden;
 }
+
+img { max-width: 100%; height: auto; }
+table { max-width: 100%; }
 
 a { color: var(--secondary); text-decoration: none; transition: color 0.2s; }
 a:hover { color: var(--primary-light); }
@@ -300,8 +304,15 @@ a:hover { color: var(--primary-light); }
   .info-card { padding: 1rem 1.2rem; }
   .basic-info-table th { width: 35%; }
   .spot-grid { grid-template-columns: 1fr; }
-  .japan-map { grid-template-columns: repeat(8, 1fr); }
+  .japan-map { grid-template-columns: repeat(8, 1fr) !important; min-height: auto !important; }
   .pref-cell { font-size: 0.6rem; }
+  .pref-list { grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)); }
+}
+
+@media (max-width: 480px) {
+  .japan-map { grid-template-columns: repeat(6, 1fr) !important; }
+  .pref-cell { font-size: 0.55rem; padding: 1px; }
+  .pref-list { grid-template-columns: repeat(auto-fill, minmax(90px, 1fr)); }
 }
 
 /* AdSense placeholder */
