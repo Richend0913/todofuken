@@ -8,6 +8,7 @@ import urllib.parse
 SITE_TITLE = "都道府県ガイド"
 SITE_DESC = "日本全国47都道府県の特徴・名産品・観光スポット・ご当地グルメ・方言を詳しく紹介。旅行計画やお取り寄せの参考に。"
 ADSENSE_ID = ""  # AdSense removed: not approved (2026-11-02)
+GA_TAG = '<script async src="https://www.googletagmanager.com/gtag/js?id=G-63VB4HT3T2"></script>\n<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag(\'js\',new Date());gtag(\'config\',\'G-63VB4HT3T2\',{page_area:\'todofuken\'});</script>'
 AMAZON_TAG = "okuritegift-22"
 BASE_URL = "https://richend0913.github.io/todofuken"
 
@@ -1548,6 +1549,7 @@ def generate_pref_page(pref):
     html = f"""<!DOCTYPE html>
 <html lang="ja">
 <head>
+{GA_TAG}
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>{name}の特徴・名産品・観光スポット｜{SITE_TITLE}</title>
@@ -1703,6 +1705,7 @@ def generate_index():
     html = f"""<!DOCTYPE html>
 <html lang="ja">
 <head>
+{GA_TAG}
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>{SITE_TITLE}｜47都道府県の特徴・名産・観光を完全網羅</title>
