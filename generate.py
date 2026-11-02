@@ -7,7 +7,7 @@ import urllib.parse
 
 SITE_TITLE = "都道府県ガイド"
 SITE_DESC = "日本全国47都道府県の特徴・名産品・観光スポット・ご当地グルメ・方言を詳しく紹介。旅行計画やお取り寄せの参考に。"
-ADSENSE_ID = "ca-pub-6327505164684489"
+ADSENSE_ID = ""  # AdSense removed: not approved (2026-11-02)
 AMAZON_TAG = "okuritegift-22"
 BASE_URL = "https://richend0913.github.io/todofuken"
 
@@ -1560,7 +1560,6 @@ def generate_pref_page(pref):
   <meta property="og:url" content="{BASE_URL}/pref/{slug}.html">
   <link rel="stylesheet" href="../css/style.css">
   <script type="application/ld+json">{jsonld}</script>
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client={ADSENSE_ID}" crossorigin="anonymous"></script>
 </head>
 <body>
   <header class="site-header">
@@ -1573,11 +1572,6 @@ def generate_pref_page(pref):
       <a href="../index.html">都道府県ガイド TOP</a> &gt; <span>{name}</span>
     </nav>
 
-    <!-- AdSense -->
-    <div class="ad-unit">
-      <ins class="adsbygoogle" style="display:block" data-ad-client="{ADSENSE_ID}" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
-      <script>(adsbygoogle = window.adsbygoogle || []).push({{}});</script>
-    </div>
 
     <!-- 基本情報 -->
     <div class="info-card">
@@ -1609,11 +1603,6 @@ def generate_pref_page(pref):
       </div>
     </div>
 
-    <!-- AdSense mid -->
-    <div class="ad-unit">
-      <ins class="adsbygoogle" style="display:block" data-ad-client="{ADSENSE_ID}" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
-      <script>(adsbygoogle = window.adsbygoogle || []).push({{}});</script>
-    </div>
 
     <!-- 観光スポット -->
     <div class="info-card">
@@ -1654,11 +1643,6 @@ def generate_pref_page(pref):
       </div>
     </div>
 
-    <!-- AdSense bottom -->
-    <div class="ad-unit">
-      <ins class="adsbygoogle" style="display:block" data-ad-client="{ADSENSE_ID}" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
-      <script>(adsbygoogle = window.adsbygoogle || []).push({{}});</script>
-    </div>
   </div>
 
   <footer class="site-footer">
@@ -1731,7 +1715,6 @@ def generate_index():
   <meta property="og:url" content="{BASE_URL}/">
   <link rel="stylesheet" href="css/style.css">
   <script type="application/ld+json">{jsonld}</script>
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client={ADSENSE_ID}" crossorigin="anonymous"></script>
 </head>
 <body>
   <header class="site-header">
@@ -1740,11 +1723,6 @@ def generate_index():
   </header>
 
   <div class="container">
-    <!-- AdSense top -->
-    <div class="ad-unit">
-      <ins class="adsbygoogle" style="display:block" data-ad-client="{ADSENSE_ID}" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
-      <script>(adsbygoogle = window.adsbygoogle || []).push({{}});</script>
-    </div>
 
     <h2 style="text-align:center;color:var(--primary-dark);margin:1.5rem 0;">地方から探す</h2>
 
@@ -1757,11 +1735,6 @@ def generate_index():
       {map_cells}
     </div>
 
-    <!-- AdSense mid -->
-    <div class="ad-unit">
-      <ins class="adsbygoogle" style="display:block" data-ad-client="{ADSENSE_ID}" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
-      <script>(adsbygoogle = window.adsbygoogle || []).push({{}});</script>
-    </div>
 
     <h2 style="text-align:center;color:var(--primary-dark);margin:2rem 0 1rem;">都道府県一覧</h2>
 
@@ -1769,11 +1742,6 @@ def generate_index():
       {list_by_region}
     </div>
 
-    <!-- AdSense bottom -->
-    <div class="ad-unit">
-      <ins class="adsbygoogle" style="display:block" data-ad-client="{ADSENSE_ID}" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
-      <script>(adsbygoogle = window.adsbygoogle || []).push({{}});</script>
-    </div>
   </div>
 
   <footer class="site-footer">
