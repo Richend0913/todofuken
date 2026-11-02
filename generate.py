@@ -10,6 +10,9 @@ SITE_DESC = "日本全国47都道府県の特徴・名産品・観光スポッ�
 ADSENSE_ID = ""  # AdSense removed: not approved (2026-11-02)
 GA_TAG = '<script async src="https://www.googletagmanager.com/gtag/js?id=G-63VB4HT3T2"></script>\n<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag(\'js\',new Date());gtag(\'config\',\'G-63VB4HT3T2\',{page_area:\'todofuken\'});</script>'
 AMAZON_TAG = "okuritegift-22"
+# 楽天アフィリエイト: 姉妹サイト（calorie-book等）と共有のIDを使用。
+# サイト別IDが発行されたらこの定数を差し替える。
+RAKUTEN_AFF_ID = "522e40a0.f2dc4208.522e40a1.385f875e"
 BASE_URL = "https://richend0913.github.io/todofuken"
 
 # fmt: off
@@ -1494,6 +1497,12 @@ def amazon_search_url(query):
     return f"https://www.amazon.co.jp/s?k={q}&tag={AMAZON_TAG}"
 
 
+def rakuten_search_url(keyword):
+    """Generate Rakuten Ichiba search URL via hb.afl (same pattern as calorie-book)."""
+    rakuten_search = f"https://search.rakuten.co.jp/search/mall/{urllib.parse.quote(keyword)}/"
+    return f"https://hb.afl.rakuten.co.jp/ichiba/{RAKUTEN_AFF_ID}/?pc={urllib.parse.quote(rakuten_search, safe='')}&link_type=hybrid_url"
+
+
 def generate_pref_page(pref):
     """Generate individual prefecture HTML page."""
     name = pref["name"]
@@ -1534,6 +1543,10 @@ def generate_pref_page(pref):
 
     # Amazon search for general otoriyose
     otoriyose_url = amazon_search_url(f"{name} お取り寄せ グルメ 名産")
+
+    # Rakuten Ichiba card for the prefecture's signature product (bottom slot)
+    top_product = pref["products"][0][0] if pref["products"] else "名産品"
+    rakuten_url = rakuten_search_url(f"{name} {top_product} お取り寄せ")
 
     # JSON-LD
     jsonld = json.dumps({
@@ -1642,6 +1655,16 @@ def generate_pref_page(pref):
       <h2>隣接する都道府県</h2>
       <div class="neighbor-links">
         {neighbor_html}
+      </div>
+    </div>
+
+    <!-- 楽天市場 名産品カード（旧広告枠・末尾） -->
+    <div class="info-card">
+      <p class="pr-label">広告・PR</p>
+      <h2>{name}の名産品を楽天市場で探す</h2>
+      <p>{name}を代表する名産品「{top_product}」などのお取り寄せは、楽天市場でも探せます。</p>
+      <div class="affiliate-section">
+        <a href="{rakuten_url}" class="affiliate-link" target="_blank" rel="nofollow sponsored noopener">楽天市場で「{top_product}」を探す</a>
       </div>
     </div>
 
